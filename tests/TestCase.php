@@ -2,9 +2,9 @@
 
 namespace Codedor\Seo\Tests;
 
+use Codedor\Seo\Providers\SeoServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Codedor\Seo\Providers\SeoServiceProvider;
 
 class TestCase extends Orchestra
 {

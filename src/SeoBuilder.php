@@ -21,9 +21,6 @@ class SeoBuilder
 
     /**
      * Add a tag to the items
-     *
-     * @param Tag $item
-     * @return void
      */
     public function tag(Tag $item): void
     {
@@ -33,10 +30,6 @@ class SeoBuilder
 
     /**
      * Add multiple tags to the items
-     *
-     * @param array $items
-     * @param bool $overwrite
-     * @return void
      */
     public function tags(array $items, bool $overwrite = true): void
     {
@@ -69,10 +62,8 @@ class SeoBuilder
 
     /**
      * Render the tags
-     *
-     * @return string
      */
-    public function render() : string
+    public function render(): string
     {
         $this->setDefaults();
 
@@ -85,10 +76,8 @@ class SeoBuilder
 
     /**
      * Return the tags as collection
-     *
-     * @return object
      */
-    public function getTags() : object
+    public function getTags(): object
     {
         return $this->items
             ->map(function ($tag) {
@@ -99,10 +88,9 @@ class SeoBuilder
     /**
      * Return the tag content
      *
-     * @param string $tagName (like 'meta_title')
-     * @return string
+     * @param  string  $tagName (like 'meta_title')
      */
-    public function getTag($tagName) : string
+    public function getTag($tagName): string
     {
         return isset($this->items[$tagName]) ? $this->items[$tagName]->content() : '';
     }

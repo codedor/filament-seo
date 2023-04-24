@@ -7,10 +7,15 @@ use Illuminate\Support\Str;
 class BaseTag implements Tag
 {
     protected $attribute = 'name';
+
     protected $prefix = '';
+
     protected $identifierPrefix = '';
+
     protected $key;
+
     protected $content;
+
     protected $settings;
 
     public function __construct(string $key, ?string $content, array $settings = [])
@@ -20,7 +25,7 @@ class BaseTag implements Tag
         $this->settings = $settings;
     }
 
-    public function beforeSave(?string $content) : ?string
+    public function beforeSave(?string $content): ?string
     {
         $rules = $this->rules();
         $maxLength = 255;
@@ -35,22 +40,22 @@ class BaseTag implements Tag
         return Str::limit(strip_tags($content), $maxLength, '');
     }
 
-    public function identifier() : string
+    public function identifier(): string
     {
         return $this->identifierPrefix . $this->key();
     }
 
-    public function key() : string
+    public function key(): string
     {
         return $this->key ?? '';
     }
 
-    public function prefixedKey() : string
+    public function prefixedKey(): string
     {
         return $this->prefix . $this->key();
     }
 
-    public function content(bool $raw = false) : string
+    public function content(bool $raw = false): string
     {
         return $this->content ?? '';
     }
@@ -64,14 +69,14 @@ class BaseTag implements Tag
         return $this->settings;
     }
 
-    public function render() : string
+    public function render(): string
     {
         $content = str_replace('"', '\'', $this->content() ?? '');
 
         return "<meta {$this->attribute}=\"{$this->prefixedKey()}\" content=\"${content}\">";
     }
 
-    public function rules() : array
+    public function rules(): array
     {
         $rules = [];
 

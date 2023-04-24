@@ -12,6 +12,7 @@ class SeoRoute extends Model
     use LogsActivity;
 
     public $translatedAttributes = ['og_title', 'og_description', 'meta_title', 'meta_description', 'online'];
+
     protected $fillable = [
         'route',
         'og_type',

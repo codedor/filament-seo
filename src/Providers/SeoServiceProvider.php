@@ -15,7 +15,6 @@ class SeoServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasMigration('create_seo_routes_table')
             ->hasMigration('create_seo_fields_table')
-            ->runsMigrations()
-            ;
+            ->runsMigrations();
     }
 }
