@@ -41,9 +41,7 @@ class SeoBuilder
     public function tags(array $items, bool $overwrite = true): void
     {
         collect($items)
-            ->filter(function ($field) {
-                return isset($field['type']);
-            })
+            ->filter(fn (array $field) => isset($field['type']))
             ->map(function ($field) {
                 $class = $field['type'];
 
@@ -77,9 +75,7 @@ class SeoBuilder
         $this->setDefaults();
 
         return $this->items
-            ->map(function ($tag) {
-                return $tag->render();
-            })
+            ->map(fn (Tag $tag) => $tag->render())
             ->implode('');
     }
 
@@ -91,9 +87,7 @@ class SeoBuilder
     public function getTags() : object
     {
         return $this->items
-            ->map(function ($tag) {
-                return $tag->content();
-            });
+            ->map(fn ($tag) => $tag->content());
     }
 
     /**

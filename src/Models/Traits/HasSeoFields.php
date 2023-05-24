@@ -14,10 +14,6 @@ trait HasSeoFields
         static::deleting(function (Model $entity) {
             $entity->seoFields()->get()->each->delete();
         });
-
-        static::saving(function (Model $entity) {
-            return $entity->saveSeoFields();
-        });
     }
 
     /**
@@ -43,53 +39,36 @@ trait HasSeoFields
         return SeoFieldOptions::create();
     }
 
-    public function saveSeoFields()
+    public function saveSeoFieldState(array $state)
     {
         $seoFields = $this->getSeoFieldOptions()->list($this);
 
-        $seoEntities = [];
-
-        $seoFields->filter(function ($seoField) {
-            return array_key_exists($seoField->identifier(), $this->toArray());
-        })
-            ->each(function ($seoField) use (&$seoEntities) {
-                $content = $this->getAttribute($seoField->identifier());
-                unset($this->{$seoField->identifier()});
+        $seoFields->filter(fn ($seoField) => array_key_exists($seoField->identifier(), $state))
+            ->each(function ($seoField) use ($state) {
+                $content = $state[$seoField->identifier()];
 
                 $defaultAttribute = $seoField->settings('default');
 
-                if ((! $content || $content === 'null') && $defaultAttribute) {
+                if (! $content && $defaultAttribute) {
                     $content = $this->getAttribute($defaultAttribute)
                         // Check if the user didn't fill in a field name by accident
                         // 'online' for example
-                        ?? array_key_exists($defaultAttribute, $this->toArray())
+                        ?? array_key_exists($defaultAttribute, $state)
                             ? null
                             : $defaultAttribute;
                 }
 
-                $seoEntities[] = [
-                    'attributes' => [
+                $this->seoFields()->updateOrCreate(
+                    [
                         'type' => get_class($seoField),
                         'name' => $seoField->key(),
                     ],
-                    'values' => [
+                    [
                         'content' => $seoField->beforeSave($content),
-                    ],
-                ];
+                    ]
+                );
             });
 
-        if (! empty($seoEntities)) {
-            $this->save();
-
-            foreach ($seoEntities as $seoEntity) {
-                $this->seoFields()->updateOrCreate(
-                    $seoEntity['attributes'],
-                    $seoEntity['values']
-                );
-            }
-        }
-
-        return $this;
     }
 
     public function initSeo()
