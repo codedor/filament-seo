@@ -11,37 +11,37 @@ return [
         'title_og' => [
             'type' => OpenGraph::class,
             'name' => 'title',
-            'content' => config('app.name')
+            'content' => config('app.name'),
         ],
         'title_meta' => [
             'type' => Meta::class,
             'name' => 'title',
-            'content' => config('app.name')
+            'content' => config('app.name'),
         ],
         'description_og' => [
             'type' => OpenGraph::class,
             'name' => 'description',
-            'content' => ''
+            'content' => '',
         ],
         'description_meta' => [
             'type' => Meta::class,
             'name' => 'description',
-            'content' => ''
+            'content' => '',
         ],
         'image_og' => [
             'type' => OpenGraphImage::class,
             'name' => 'image',
-            'content' => ''
+            'content' => '',
         ],
         'type_og' => [
             'type' => OpenGraph::class,
             'name' => 'type',
-            'content' => 'website'
+            'content' => 'website',
         ],
         'url_og' => [
             'type' => OgUrl::class,
             'name' => 'url',
-            'content' => ''
+            'content' => '',
         ],
     ],
 ];

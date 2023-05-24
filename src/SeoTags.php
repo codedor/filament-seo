@@ -1,4 +1,5 @@
 <?php
+
 namespace Codedor\Seo;
 
 class SeoTags
@@ -12,7 +13,7 @@ class SeoTags
      * Convert database fields to meta tags
      * Expects a key => value array
      */
-    public static function fromDatabaseFields(array $data) : array
+    public static function fromDatabaseFields(array $data): array
     {
         $tags = [];
 
@@ -31,7 +32,7 @@ class SeoTags
         return $tags;
     }
 
-    public static function addField(string $field, string $value, string $prefix) : array
+    public static function addField(string $field, string $value, string $prefix): array
     {
         $cleanField = str_replace($prefix . '_', '', $field);
 
@@ -52,7 +53,7 @@ class SeoTags
         return [];
     }
 
-    public static function html(array $seoTags) : string
+    public static function html(array $seoTags): string
     {
         $output = '';
 
@@ -78,7 +79,7 @@ class SeoTags
         return "<meta {$attributes}>\n    ";
     }
 
-    private static function fix(string $text) : string
+    private static function fix(string $text): string
     {
         $text = preg_replace('/<[^>]+>/', ' ', $text);
         $text = preg_replace('/[\r\n\s]+/', ' ', $text);

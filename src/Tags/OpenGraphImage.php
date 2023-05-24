@@ -6,7 +6,7 @@ use Codedor\Media\Models\Attachment;
 
 class OpenGraphImage extends OpenGraph
 {
-    public function content(bool $raw = false) : string
+    public function content(bool $raw = false): string
     {
         if (! $this->content) {
             return '';
@@ -26,7 +26,7 @@ class OpenGraphImage extends OpenGraph
         // return $attachment->getFormatOrOriginal('og_image');
     }
 
-    public function beforeSave(?string $content) : ?string
+    public function beforeSave(?string $content): ?string
     {
         return $content;
     }

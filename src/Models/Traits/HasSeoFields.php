@@ -34,7 +34,7 @@ trait HasSeoFields
         SeoSeoBuilder::tags($this->seoFields->toArray());
     }
 
-    public function getSeoOptions() : SeoFieldOptions
+    public function getSeoOptions(): SeoFieldOptions
     {
         return SeoFieldOptions::create();
     }

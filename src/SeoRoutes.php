@@ -1,4 +1,5 @@
 <?php
+
 namespace Codedor\Seo;
 
 use Codedor\Seo\Facades\SeoBuilder;
