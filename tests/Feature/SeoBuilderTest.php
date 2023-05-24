@@ -2,7 +2,6 @@
 
 use Codedor\Seo\SeoBuilder;
 use Codedor\Seo\Tags\BaseTag;
-use Codedor\Seo\Tags\Tag;
 
 beforeEach(function () {
     $this->seoBuilder = new SeoBuilder();
@@ -124,7 +123,7 @@ it('can render with defaults', function () {
     ];
 
     config([
-        'seo.default' => [$defaultTag]
+        'seo.default' => [$defaultTag],
     ]);
 
     $tag = new BaseTag('key', 'content', ['settings']);
