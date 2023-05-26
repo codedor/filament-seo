@@ -42,9 +42,75 @@ it('can list the tags for a model', function () {
         ->sequence(
             fn ($tag) => $tag
                 ->toBeInstanceOf(BaseTag::class)
-                ->identifier()->toBe('title'),
+                ->identifier()->toBe('title')
+                ->content()->toBe(''),
             fn ($tag) => $tag
                 ->toBeInstanceOf(BaseTag::class)
-                ->identifier()->toBe('description'),
+                ->identifier()->toBe('description')
+                ->content()->toBe(''),
+        );
+});
+
+it('can list the tags for a model with seo fields', function () {
+    $page = Page::create([
+        'title' => 'title',
+        'description' => 'description',
+    ]);
+
+    $page->seoFields()->createMany([
+        [
+            'type' => BaseTag::class,
+            'name' => 'title',
+            'content' => 'seo title',
+        ],
+        [
+            'type' => BaseTag::class,
+            'name' => 'description',
+            'content' => '',
+        ],
+    ]);
+
+    expect($page->getSeoFieldOptions()->list($page))
+        ->sequence(
+            fn ($tag) => $tag
+                ->toBeInstanceOf(BaseTag::class)
+                ->identifier()->toBe('title')
+                ->content()->toBe('seo title'),
+            fn ($tag) => $tag
+                ->toBeInstanceOf(BaseTag::class)
+                ->identifier()->toBe('description')
+                ->content()->toBe(''),
+        );
+});
+
+it('can list the tags for a model with seo fields and falls back on default value', function () {
+    $page = Page::create([
+        'title' => 'title',
+        'description' => 'description',
+    ]);
+
+    $page->seoFields()->createMany([
+        [
+            'type' => BaseTag::class,
+            'name' => 'title',
+            'content' => '',
+        ],
+        [
+            'type' => BaseTag::class,
+            'name' => 'description',
+            'content' => '',
+        ],
+    ]);
+
+    expect($page->getSeoFieldOptions()->list($page))
+        ->sequence(
+            fn ($tag) => $tag
+                ->toBeInstanceOf(BaseTag::class)
+                ->identifier()->toBe('title')
+                ->content()->toBe('title'),
+            fn ($tag) => $tag
+                ->toBeInstanceOf(BaseTag::class)
+                ->identifier()->toBe('description')
+                ->content()->toBe(''),
         );
 });

@@ -10,7 +10,6 @@ use Codedor\Seo\Tags\OpenGraph;
 use Codedor\Seo\Tags\OpenGraphImage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
 
 class SeoRoutes
 {
@@ -26,23 +25,16 @@ class SeoRoutes
                 ) {
                     return false;
                 }
+
                 $middleware = $route->action['middleware'];
-                if (! is_array($middleware)) {
-                    $middleware = [$route->action['middleware']];
-                }
 
                 return in_array('seo', $middleware)
                     || in_array(SeoMiddleware::class, $middleware);
             })
             ->map(function ($route) {
                 $routeName = $route->action['as'] ?? '';
-                if (Str::endsWith($routeName, '.') || Str::startsWith($routeName, 'generated::')) {
-                    $routeName = '';
-                }
+
                 $routeMiddleware = $route->action['middleware'] ?? [];
-                if (! is_array($routeMiddleware)) {
-                    $routeMiddleware = [$routeMiddleware];
-                }
 
                 return [
                     'as' => $routeName,
@@ -96,9 +88,6 @@ class SeoRoutes
     public static function fillPlaceholders(?string $text, ?Model $entity)
     {
         if (! $entity) {
-            return $text;
-        }
-        if (! $entity->exists) {
             return $text;
         }
 

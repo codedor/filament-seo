@@ -11,6 +11,11 @@ class Page extends Model
 {
     use HasSeoFields;
 
+    protected $fillable = [
+        'title',
+        'description',
+    ];
+
     public function getSeoFieldOptions(): SeoFieldOptions
     {
         return SeoFieldOptions::create()

@@ -2,6 +2,7 @@
 
 namespace Codedor\Seo\Providers;
 
+use Closure;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -16,5 +17,12 @@ class SeoServiceProvider extends PackageServiceProvider
             ->hasMigration('create_seo_routes_table')
             ->hasMigration('create_seo_fields_table')
             ->runsMigrations();
+    }
+
+    public function packageBooted()
+    {
+        $this->app->bind('seo', function () {
+            return new \Codedor\Seo\SeoBuilder();
+        });
     }
 }
