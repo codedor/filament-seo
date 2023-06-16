@@ -2,6 +2,7 @@
 
 namespace Codedor\Seo\Providers;
 
+use Codedor\Seo\Console\Commands\ImportSeoRoutes;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -15,6 +16,7 @@ class SeoServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasMigration('create_seo_routes_table')
             ->hasMigration('create_seo_fields_table')
+            ->hasConsoleCommand(ImportSeoRoutes::class)
             ->runsMigrations();
     }
 

@@ -16,9 +16,17 @@ it('will not the seo routes if no route is found', function () {
 });
 
 it('will build the seo routes when route matches', function () {
-    Route::get('test', fn () => 'route');
+    $route = Route::get('test', fn () => 'route')
+        ->name('test');
 
-    SeoBuilder::shouldReceive('build')
+    \Codedor\Seo\Models\SeoRoute::create([
+        'route' => 'test',
+        'og_type' => 'site',
+        'description' => 'test',
+        'online' => true,
+    ]);
+
+    SeoBuilder::shouldReceive('tags')
         ->once();
 
     $symfonyRequest = HttpFoundationRequest::create(
@@ -26,6 +34,7 @@ it('will build the seo routes when route matches', function () {
     );
 
     $request = Request::createFromBase($symfonyRequest);
+    $request->setRouteResolver(fn () => $route);
 
     app(SeoMiddleware::class)->handle($request, fn() => '');
-})->todo('see how middleware can be tested');
+});
