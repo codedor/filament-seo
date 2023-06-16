@@ -2,7 +2,6 @@
 
 namespace Codedor\Seo\Providers;
 
-use Closure;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
