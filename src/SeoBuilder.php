@@ -52,7 +52,7 @@ class SeoBuilder
                 return true;
             })
             ->each(function ($tag) {
-                if ($tag && $tag->content()) {
+                if ($tag->content()) {
                     $this->tag($tag);
                 }
             });

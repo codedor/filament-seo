@@ -11,7 +11,7 @@ class SeoFieldOptions
 
     public static function create(): self
     {
-        return new static();
+        return new self();
     }
 
     public function tag(array $tag): self

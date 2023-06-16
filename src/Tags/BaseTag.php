@@ -71,7 +71,7 @@ class BaseTag implements Tag
 
     public function render(): string
     {
-        $content = str_replace('"', '\'', $this->content() ?? '');
+        $content = str_replace('"', '\'', $this->content());
 
         return "<meta {$this->attribute}=\"{$this->prefixedKey()}\" content=\"{$content}\">";
     }

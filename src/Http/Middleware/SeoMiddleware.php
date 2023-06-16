@@ -23,11 +23,11 @@ class SeoMiddleware
             return $next($request);
         }
 
-        $entity = collect($route?->parameters)->filter(function ($entity) {
-            return $entity instanceof Model;
-        })->last();
+        $entity = collect($route->parameters)
+            ->filter(fn ($entity) => $entity instanceof Model)
+            ->last();
 
-        $seoRoute = SeoRoute::whereRoute($route?->getName())
+        $seoRoute = SeoRoute::where('route', $route->getName())
             ->first();
 
         if ($seoRoute) {
