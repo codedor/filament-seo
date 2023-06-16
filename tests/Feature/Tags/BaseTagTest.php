@@ -22,7 +22,7 @@ it('can save content with a maximum length when length is set in the rules', fun
     config([
         'seo.rules.fields' => [
             'key' => [
-                'max:125'
+                'max:125',
             ],
         ],
     ]);
