@@ -36,6 +36,5 @@ it('will build the seo routes when route matches', function () {
     $request = Request::createFromBase($symfonyRequest);
     $request->setRouteResolver(fn () => $route);
 
-
     app(SeoMiddleware::class)->handle($request, fn () => '');
 });
