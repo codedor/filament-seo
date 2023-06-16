@@ -42,7 +42,7 @@ class ImportSeoRoutes extends Command
 
         $count = 0;
         foreach ($seoRoutes as $route) {
-            $seoRoute = config('seo.seo_routes_model')::updateOrCreate(
+            config('seo.seo_routes_model')::updateOrCreate(
                 [
                     'route' => $route['as'],
                 ],

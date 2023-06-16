@@ -73,7 +73,7 @@ class BaseTag implements Tag
     {
         $content = str_replace('"', '\'', $this->content() ?? '');
 
-        return "<meta {$this->attribute}=\"{$this->prefixedKey()}\" content=\"${content}\">";
+        return "<meta {$this->attribute}=\"{$this->prefixedKey()}\" content=\"{$content}\">";
     }
 
     public function rules(): array

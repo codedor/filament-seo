@@ -8,5 +8,5 @@ class OpenGraph extends BaseTag
 
     protected $prefix = 'og:';
 
-    public $identifierPrefix = 'og_';
+    protected $identifierPrefix = 'og_';
 }

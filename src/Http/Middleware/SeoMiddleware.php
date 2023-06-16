@@ -17,11 +17,17 @@ class SeoMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $entity = collect($request->route()->parameters)->filter(function ($entity) {
+        $route = $request->route();
+
+        if (! $route) {
+            return $next($request);
+        }
+
+        $entity = collect($route?->parameters)->filter(function ($entity) {
             return $entity instanceof Model;
         })->last();
 
-        $seoRoute = SeoRoute::whereRoute($request->route()->getName())
+        $seoRoute = SeoRoute::whereRoute($route?->getName())
             ->first();
 
         if ($seoRoute) {
