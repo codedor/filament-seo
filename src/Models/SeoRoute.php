@@ -2,7 +2,6 @@
 
 namespace Codedor\Seo\Models;
 
-use AllowDynamicProperties;
 use Illuminate\Database\Eloquent\Model;
 
 /**
