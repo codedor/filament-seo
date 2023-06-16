@@ -1,7 +1,7 @@
 <?php
 
-use Codedor\Seo\Tags\Tag;
 use Codedor\Seo\Tags\OgUrl;
+use Codedor\Seo\Tags\Tag;
 
 it('can construct a class', function () {
     expect(new OgUrl('key', 'content'))

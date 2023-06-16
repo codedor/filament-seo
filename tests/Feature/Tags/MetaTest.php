@@ -1,7 +1,7 @@
 <?php
 
-use Codedor\Seo\Tags\Tag;
 use Codedor\Seo\Tags\Meta;
+use Codedor\Seo\Tags\Tag;
 
 it('can construct a class', function () {
     expect(new Meta('key', 'content'))

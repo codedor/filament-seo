@@ -2,8 +2,8 @@
 
 namespace Codedor\Seo\Models\Traits;
 
-use Codedor\Seo\Models\SeoField;
 use Codedor\Seo\Facades\SeoBuilder;
+use Codedor\Seo\Models\SeoField;
 use Codedor\Seo\SeoFieldOptions;
 use Illuminate\Database\Eloquent\Model;
 

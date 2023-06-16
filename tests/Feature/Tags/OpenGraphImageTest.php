@@ -1,8 +1,7 @@
 <?php
 
-use Codedor\Seo\Tags\Tag;
 use Codedor\Seo\Tags\OpenGraphImage;
-
+use Codedor\Seo\Tags\Tag;
 
 it('can construct a class', function () {
     expect(new OpenGraphImage('key', 'content'))

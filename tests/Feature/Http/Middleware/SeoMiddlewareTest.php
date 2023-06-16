@@ -12,7 +12,7 @@ it('will not the seo routes if no route is found', function () {
     SeoBuilder::shouldReceive('build')
         ->never();
 
-    app(SeoMiddleware::class)->handle(Request::create(''), fn() => '');
+    app(SeoMiddleware::class)->handle(Request::create(''), fn () => '');
 });
 
 it('will build the seo routes when route matches', function () {
@@ -36,5 +36,6 @@ it('will build the seo routes when route matches', function () {
     $request = Request::createFromBase($symfonyRequest);
     $request->setRouteResolver(fn () => $route);
 
-    app(SeoMiddleware::class)->handle($request, fn() => '');
+
+    app(SeoMiddleware::class)->handle($request, fn () => '');
 });

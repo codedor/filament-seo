@@ -1,7 +1,7 @@
 <?php
 
-use Codedor\Seo\Tags\Tag;
 use Codedor\Seo\Tags\OpenGraph;
+use Codedor\Seo\Tags\Tag;
 
 it('can construct a class', function () {
     expect(new OpenGraph('key', 'content'))
