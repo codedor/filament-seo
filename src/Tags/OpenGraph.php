@@ -4,9 +4,9 @@ namespace Codedor\Seo\Tags;
 
 class OpenGraph extends BaseTag
 {
-    protected $attribute = 'property';
+    protected string $attribute = 'property';
 
-    protected $prefix = 'og:';
+    protected string $prefix = 'og:';
 
-    protected $identifierPrefix = 'og_';
+    protected string $identifierPrefix = 'og_';
 }

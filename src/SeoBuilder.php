@@ -31,30 +31,11 @@ class SeoBuilder
     /**
      * Add multiple tags to the items
      */
-    public function tags(array $items, bool $overwrite = true): void
+    public function tags(array $items): void
     {
         collect($items)
-            ->filter(fn (array $field) => isset($field['type']))
-            ->map(function ($field) {
-                $class = $field['type'];
-
-                return new $class($field['name'], $field['content']);
-            })
-            ->filter(function ($item) use ($overwrite) {
-                if (! $overwrite) {
-                    $identifier = $item->identifier();
-
-                    if ($this->items->has($identifier) && $this->items->get($identifier)->content()) {
-                        return false;
-                    }
-                }
-
-                return true;
-            })
             ->each(function ($tag) {
-                if ($tag->content()) {
-                    $this->tag($tag);
-                }
+                $this->tag($tag);
             });
     }
 

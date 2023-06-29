@@ -4,7 +4,11 @@ namespace Codedor\Seo\Tests\Fixtures\Models;
 
 use Codedor\Seo\Models\Traits\HasSeoFields;
 use Codedor\Seo\SeoFieldOptions;
+use Codedor\Seo\SeoTags;
 use Codedor\Seo\Tags\BaseTag;
+use Codedor\Seo\Tags\Meta;
+use Codedor\Seo\Tags\OpenGraph;
+use Codedor\Seo\Tags\OpenGraphImage;
 use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
@@ -16,18 +20,10 @@ class Page extends Model
         'description',
     ];
 
-    public function getSeoFieldOptions(): SeoFieldOptions
+    public function getSeoTags(): SeoTags
     {
-        return SeoFieldOptions::create()
-            ->tag([
-                'type' => [BaseTag::class],
-                'name' => 'title',
-                'default' => $this->title,
-            ])
-            ->tag([
-                'type' => [BaseTag::class],
-                'name' => 'description',
-                'default' => $this->body,
-            ]);
+        return SeoTags::make()
+            ->add(BaseTag::make($this, 'title', 'title'))
+            ->add(BaseTag::make($this, 'description', fn () => $this->body));
     }
 }

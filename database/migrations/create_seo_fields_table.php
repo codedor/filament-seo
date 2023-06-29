@@ -14,7 +14,8 @@ return new class extends Migration
             $table->morphs('model');
             $table->string('type');
             $table->string('name');
-            $table->string('content')->nullable();
+            $table->longText('content')->nullable();
+            $table->boolean('is_translatable');
         });
     }
 };

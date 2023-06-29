@@ -2,13 +2,14 @@
 
 use Codedor\Seo\SeoBuilder;
 use Codedor\Seo\Tags\BaseTag;
-
+// how will we render the seo tags????
 beforeEach(function () {
     $this->seoBuilder = new SeoBuilder();
+    $this->page = new \Codedor\Seo\Tests\Fixtures\Models\Page();
 });
 
 it('can add a tag', function () {
-    $tag = new BaseTag('key', 'content', ['settings']);
+    $tag = new BaseTag($this->page, 'key', 'content', ['settings']);
 
     $this->seoBuilder->tag($tag);
 
@@ -18,29 +19,20 @@ it('can add a tag', function () {
 });
 
 it('can add multiple tag', function () {
-    $tagOne = [
-        'type' => BaseTag::class,
-        'name' => 'tag_one',
-        'content' => 'content one',
-    ];
+    $tagOne = new BaseTag($this->page, 'tag one', 'content');
+    $tagTwo = new BaseTag($this->page, 'tag two', 'content');
 
-    $tagTwo = [
-        'type' => BaseTag::class,
-        'name' => 'tag_two',
-        'content' => 'content two',
-    ];
-
-    $this->seoBuilder->tags([$tagOne, $tagTwo], false);
+    $this->seoBuilder->tags([$tagOne, $tagTwo]);
 
     expect($this->seoBuilder->items)
         ->toHaveCount(2)
         ->sequence(
             fn ($tag) => $tag
                 ->toBeInstanceOf(BaseTag::class)
-                ->identifier()->toBe('tag_one'),
+                ->getIdentifier()->toBe('tag_one'),
             fn ($tag) => $tag
                 ->toBeInstanceOf(BaseTag::class)
-                ->identifier()->toBe('tag_two'),
+                ->getIdentifier()->toBe('tag_two'),
         );
 });
 

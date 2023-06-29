@@ -14,6 +14,7 @@ it('has fillable fields', function () {
             'type',
             'name',
             'content',
+            'is_translatable',
         ]);
 });
 

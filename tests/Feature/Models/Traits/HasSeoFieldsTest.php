@@ -17,11 +17,13 @@ beforeEach(function () {
             'type' => BaseTag::class,
             'name' => 'title',
             'content' => 'seo title',
+            'is_translatable' => false,
         ],
         [
             'type' => BaseTag::class,
             'name' => 'description',
             'content' => '',
+            'is_translatable' => false,
         ],
     ]);
 });
@@ -40,11 +42,6 @@ it('sets the seo builder tags', function () {
         ->with($this->page->seoFields->toArray());
 
     $this->page->withSeoFields();
-});
-
-it('can get seo options', function () {
-    expect($this->page->getSeoOptions())
-        ->toBeInstanceOf(SeoFieldOptions::class);
 });
 
 it('can save the seo field state', function () {
@@ -68,6 +65,7 @@ it('can save the seo field state', function () {
 
 it('skips the seo fields that are not in the state', function () {
     $this->page->saveSeoFieldState([
+        'title' => 'seo title',
         'description' => 'new description',
     ]);
 
@@ -105,7 +103,7 @@ it('can init the seo', function () {
     // 2 from beforeEach
     $this->assertDatabaseCount(SeoField::class, 2);
 
-    $page->initSeo();
+    $page->saveSeoFieldState();
 
     $this->assertDatabaseCount(SeoField::class, 4);
 

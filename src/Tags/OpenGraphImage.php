@@ -6,17 +6,19 @@ use Codedor\Media\Models\Attachment;
 
 class OpenGraphImage extends OpenGraph
 {
-    public function content(bool $raw = false): string
+    public function getContent(bool $raw = false): string
     {
-        if (! $this->content) {
+        $content = parent::getContent();
+
+        if (! parent::getContent()) {
             return '';
         }
 
         if ($raw) {
-            return $this->content;
+            return $content;
         }
 
-        return $this->content;
+        return $content;
         // $attachment = Attachment::find($this->content);
 
         // if (! $attachment) {

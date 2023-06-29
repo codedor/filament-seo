@@ -16,6 +16,7 @@ class SeoServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasMigration('create_seo_routes_table')
             ->hasMigration('create_seo_fields_table')
+            ->hasMigration('update_translatable_to_seo_fields')
             ->hasConsoleCommand(ImportSeoRoutes::class)
             ->runsMigrations();
     }

@@ -2,36 +2,42 @@
 
 namespace Codedor\Seo\Tags;
 
+use Closure;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class BaseTag implements Tag
 {
-    protected $attribute = 'name';
+    protected string $attribute = 'name';
 
-    protected $prefix = '';
+    protected string $prefix = '';
 
-    protected $identifierPrefix = '';
+    protected string $identifierPrefix = '';
 
-    protected $key;
+    protected bool $isTranslatable = false;
 
-    protected $content;
+    public function __construct(
+        protected Model $model,
+        protected string $key,
+        protected string|Closure|null $defaultAttribute,
+        protected array $settings = []
+    ) {}
 
-    protected $settings;
-
-    public function __construct(string $key, ?string $content, array $settings = [])
-    {
-        $this->key = $key;
-        $this->content = $content;
-        $this->settings = $settings;
+    public static function make(
+        Model $model,
+        string $key,
+        string|Closure|null $defaultAttribute,
+        array $settings = []
+    ): self {
+        return new static($model, $key, $defaultAttribute, $settings);
     }
 
     public function beforeSave(?string $content): ?string
     {
-        $rules = $this->rules();
         $maxLength = 255;
 
         // Limit seo content length based on max length rules from config
-        foreach ($rules as $rule) {
+        foreach ($this->getRules() as $rule) {
             if (strpos($rule, 'max:') !== false) {
                 $maxLength = (int) str_replace('max:', '', $rule);
             }
@@ -40,27 +46,87 @@ class BaseTag implements Tag
         return Str::limit(strip_tags($content), $maxLength, '');
     }
 
-    public function identifier(): string
+    public function getIdentifier(): string
     {
-        return $this->identifierPrefix . $this->key();
+        return $this->identifierPrefix . $this->getKey();
     }
 
-    public function key(): string
+    public function getKey(): string
     {
         return $this->key ?? '';
     }
 
-    public function prefixedKey(): string
+    public function getModel(): Model
     {
-        return $this->prefix . $this->key();
+        return $this->model;
     }
 
-    public function content(bool $raw = false): string
+    public function translatable(bool $isTranslatable = true): self
+    {
+        $this->isTranslatable = $isTranslatable;
+
+        return $this;
+    }
+
+    public function isTranslatable(): bool
+    {
+        return $this->isTranslatable;
+    }
+
+    public function getPrefixedKey(): string
+    {
+        return $this->prefix . $this->getKey();
+    }
+
+    public function content(?string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    public function getContent(bool $raw = false): string
     {
         return $this->content ?? '';
     }
 
-    public function settings(?string $key = null)
+    public function defaultContent(string|Closure|null $defaultContent): self
+    {
+        $this->defaultContent = $defaultContent;
+
+        return $this;
+    }
+
+    public function getDefaultContent(?string $locale = null): string|Closure|null
+    {
+        if ($this->defaultAttribute instanceof Closure) {
+            return app()->call(
+                $this->defaultAttribute,
+                [
+                    'locale' => $locale
+                ]
+            );
+        }
+
+        if (is_string($this->defaultAttribute)) {
+            if ($this->isTranslatable() && method_exists($this->model, 'getTranslation')) {
+                return $this->model->getTranslation($this->defaultAttribute, $locale, false);
+            }
+
+            return $this->model->getAttribute($this->defaultAttribute);
+        }
+
+        return $this->defaultAttribute;
+    }
+
+    public function settings(array $settings): self
+    {
+        $this->settings = $settings;
+
+        return $this;
+    }
+
+    public function getSettings(?string $key = null)
     {
         if ($key) {
             return $this->settings[$key] ?? null;
@@ -69,33 +135,33 @@ class BaseTag implements Tag
         return $this->settings;
     }
 
-    public function render(): string
-    {
-        $content = str_replace('"', '\'', $this->content());
-
-        return "<meta {$this->attribute}=\"{$this->prefixedKey()}\" content=\"{$content}\">";
-    }
-
-    public function rules(): array
+    public function getRules(): array
     {
         $rules = [];
 
-        if (! $this->settings('default') && config('seo.rules.default_empty_required')) {
+        if (! $this->getSettings('default') && config('seo.rules.default_empty_required')) {
             $rules[] = 'required';
         }
 
-        $configRules = config('seo.rules.fields.' . $this->identifier(), []);
+        $configRules = config('seo.rules.fields.' . $this->getIdentifier(), []);
 
         return array_merge($rules, $configRules);
+    }
+
+    public function render(): string
+    {
+        $content = str_replace('"', '\'', $this->getContent());
+
+        return "<meta {$this->attribute}=\"{$this->getPrefixedKey()}\" content=\"{$content}\">";
     }
 
     public function __debugInfo()
     {
         return [
-            'identifier' => $this->identifier(),
-            'key' => $this->key(),
-            'content' => $this->content(),
-            'settings' => $this->settings(),
+            'identifier' => $this->getIdentifier(),
+            'key' => $this->getKey(),
+            'content' => $this->getContent(),
+            'settings' => $this->getSettings(),
             'html' => $this->render(),
         ];
     }

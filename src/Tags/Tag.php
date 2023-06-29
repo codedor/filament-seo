@@ -12,5 +12,5 @@ interface Tag
     /**
      * Identifier of the tag
      */
-    public function identifier(): string;
+    public function getIdentifier(): string;
 }
