@@ -2,7 +2,10 @@
 
 namespace Codedor\Seo\Models;
 
+use Codedor\Seo\Formats\OgImage;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * @property string $route
@@ -15,6 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SeoRoute extends Model
 {
+    use HasTranslations;
+
     protected $fillable = [
         'route',
         'og_type',
@@ -23,5 +28,19 @@ class SeoRoute extends Model
         'og_description',
         'meta_title',
         'meta_description',
+        'online'
     ];
+
+    protected $translatable = [
+        'og_title',
+        'og_description',
+        'meta_title',
+        'meta_description',
+        'online'
+    ];
+
+    public static function getFormats(Collection $formats): Collection
+    {
+        return $formats->add(OgImage::make('og_image'));
+    }
 }

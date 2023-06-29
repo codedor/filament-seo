@@ -1,0 +1,105 @@
+<?php
+
+namespace Codedor\Seo\Filament\Resources;
+
+use Closure;
+use Codedor\Attachments\Components\Fields\AttachmentInput;
+use Codedor\Attachments\Tables\Columns\AttachmentColumn;
+use Codedor\FilamentArchitect\Filament\Fields\Architect;
+use Codedor\LinkPicker\Forms\Components\LinkPickerInput;
+use Codedor\LocaleCollection\Facades\LocaleCollection;
+use Codedor\LocaleCollection\Locale;
+use Codedor\Seo\Models\SeoRoute;
+use Codedor\Seo\Tags\BaseTag;
+use Codedor\TranslatableTabs\Forms\TranslatableTabs;
+use Codedor\TranslatableTabs\Tables\LocalesColumn;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Resources\Form;
+use Filament\Resources\Resource;
+use Filament\Resources\Table;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Route;
+
+class SeoRouteResource extends Resource
+{
+    protected static ?string $model = SeoRoute::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-link';
+
+    protected static ?string $navigationGroup = 'SEO';
+
+    public static function form(Form $form): Form
+    {
+        return $form->schema([
+            TranslatableTabs::make('Translations')
+                ->defaultFields([
+                    TextInput::make('route')->disabled(),
+                    TextInput::make('og_type'),
+                    AttachmentInput::make('og_image'),
+                ])
+                ->translatableFields(fn (string $locale) => [
+                    TextInput::make('og_title'),
+                    Textarea::make('og_description'),
+                    TextInput::make('meta_title'),
+                    Textarea::make('meta_description'),
+                    Checkbox::make('online'),
+
+                ])->columnSpan(['lg' => 2]),
+        ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('route'),
+                TextColumn::make('url_list')
+                    ->getStateUsing(
+                        static function (SeoRoute $record) {
+                            $route = Route::getRoutes()->getByName($record->route);
+
+                            if ($route) {
+                                return $route->uri;
+                            }
+
+                            return LocaleCollection::map(function (Locale $locale) use ($record) {
+                                return Route::getRoutes()->getByName($locale->locale() . '.' . $record->route)?->uri;
+                            })->filter()->join('<br>');
+                        }
+                    )
+                    ->html(),
+                TextColumn::make('og_type'),
+                AttachmentColumn::make('og_image'),
+                LocalesColumn::make('online'),
+            ])
+            ->filters([
+                //
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([]);
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListSeoRoutes::route('/'),
+            'edit' => Pages\EditSeoRoute::route('/{record}/edit'),
+        ];
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return false;
+    }
+}

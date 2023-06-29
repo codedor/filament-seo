@@ -9,15 +9,17 @@ use Codedor\Seo\Tags\Meta;
 use Codedor\Seo\Tags\OpenGraph;
 use Codedor\Seo\Tags\OpenGraphImage;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 class SeoRoutes
 {
-    public static function list()
+    public static function list(): Collection
     {
         $routeCollection = Route::getRoutes();
 
-        $routes = collect($routeCollection)
+        return collect($routeCollection)
             ->filter(function ($route) {
                 if (empty($route->action['as']) ||
                     empty($route->action['uses']) ||
@@ -34,17 +36,21 @@ class SeoRoutes
             ->map(function ($route) {
                 $routeName = $route->action['as'] ?? '';
 
+                if (isset($route->wheres['translatable_prefix'])) {
+                    $routeName = Str::after($routeName, $route->wheres['translatable_prefix'] . '.');
+                }
+
                 $routeMiddleware = $route->action['middleware'] ?? [];
 
                 return [
                     'as' => $routeName,
                     'methods' => $route->methods,
                     'action' => $route->action['uses'] ?? '',
-                    'middleware' => $routeMiddleware,
+                    'middleware' => $routeName,
                 ];
-            });
-
-        return $routes;
+            })
+            ->unique('as')
+            ->values();
     }
 
     public static function build(SeoRoute $seoRoute, ?Model $entity)

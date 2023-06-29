@@ -4,6 +4,7 @@ namespace Codedor\Seo\Console\Commands;
 
 use Codedor\Seo\SeoRoutes;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class ImportSeoRoutes extends Command
 {
@@ -19,17 +20,7 @@ class ImportSeoRoutes extends Command
      *
      * @var string
      */
-    protected $description = 'Sync Seo Routes from routes/web.php to database';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    protected $description = 'Sync routes with seo middleware to database';
 
     /**
      * Execute the console command.
@@ -38,22 +29,20 @@ class ImportSeoRoutes extends Command
      */
     public function handle()
     {
-        $seoRoutes = SeoRoutes::list();
-
-        $count = 0;
-        foreach ($seoRoutes as $route) {
-            config('seo.seo_routes_model')::updateOrCreate(
-                [
-                    'route' => $route['as'],
-                ],
-                [
-                    'route' => $route['as'],
-                    'og_type' => 'website',
-                ]
-            );
-
-            $count++;
-        }
+        $seoRouteModel = config('filament-seo.models.seo-route');
+        $count = SeoRoutes::list()
+            ->each(function ($route) use ($seoRouteModel) {
+                $seoRouteModel::updateOrCreate(
+                    [
+                        'route' => $route['as'],
+                    ],
+                    [
+                        'route' => $route['as'],
+                        'og_type' => 'website',
+                    ]
+                );
+            })
+            ->count();
 
         if ($count === 1) {
             $this->info('1 seo route has been added/updated');

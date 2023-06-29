@@ -15,12 +15,12 @@ return new class extends Migration
             $table->string('route');
             $table->string('og_type')->nullable();
             $table->string('og_image')->nullable();
-            $table->boolean('online')->default(0);
 
             $table->json('og_title')->nullable();
             $table->json('og_description')->nullable();
             $table->json('meta_title')->nullable();
             $table->json('meta_description')->nullable();
+            $table->json('online')->nullable();
         });
     }
 };

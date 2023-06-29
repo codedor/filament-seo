@@ -7,6 +7,9 @@ use Codedor\Seo\Tags\OpenGraphImage;
 
 // config for Codedor/Seo
 return [
+    'models' => [
+        'seo-route' => \Codedor\Seo\Models\SeoRoute::class,
+    ],
     'default' => [
         'title_og' => [
             'type' => OpenGraph::class,

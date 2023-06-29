@@ -10,6 +10,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "codedor/laravel-attachments": "dev-master",
+        "codedor/laravel-locale-collection": "^0.0",
         "illuminate/contracts": "^10.0",
         "spatie/laravel-package-tools": "^1.12",
         "spatie/laravel-translatable": "^6.5"
@@ -52,5 +54,11 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://codedor.repo.repman.codedor.online"
+        }
+    ]
 }
