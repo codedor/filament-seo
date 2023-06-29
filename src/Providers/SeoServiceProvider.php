@@ -8,7 +8,6 @@ use Codedor\Seo\Filament\Resources\SeoRouteResource;
 use Codedor\Seo\Models\SeoRoute;
 use Filament\PluginServiceProvider;
 use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class SeoServiceProvider extends PluginServiceProvider
 {

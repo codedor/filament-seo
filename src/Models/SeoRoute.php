@@ -28,7 +28,7 @@ class SeoRoute extends Model
         'og_description',
         'meta_title',
         'meta_description',
-        'online'
+        'online',
     ];
 
     protected $translatable = [
@@ -36,7 +36,7 @@ class SeoRoute extends Model
         'og_description',
         'meta_title',
         'meta_description',
-        'online'
+        'online',
     ];
 
     public static function getFormats(Collection $formats): Collection

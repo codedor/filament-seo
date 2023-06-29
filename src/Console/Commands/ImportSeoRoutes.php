@@ -4,7 +4,6 @@ namespace Codedor\Seo\Console\Commands;
 
 use Codedor\Seo\SeoRoutes;
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
 
 class ImportSeoRoutes extends Command
 {
