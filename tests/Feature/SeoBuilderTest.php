@@ -2,6 +2,7 @@
 
 use Codedor\Seo\SeoBuilder;
 use Codedor\Seo\Tags\BaseTag;
+
 // how will we render the seo tags????
 beforeEach(function () {
     $this->seoBuilder = new SeoBuilder();

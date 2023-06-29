@@ -3,12 +3,8 @@
 namespace Codedor\Seo\Tests\Fixtures\Models;
 
 use Codedor\Seo\Models\Traits\HasSeoFields;
-use Codedor\Seo\SeoFieldOptions;
 use Codedor\Seo\SeoTags;
 use Codedor\Seo\Tags\BaseTag;
-use Codedor\Seo\Tags\Meta;
-use Codedor\Seo\Tags\OpenGraph;
-use Codedor\Seo\Tags\OpenGraphImage;
 use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model

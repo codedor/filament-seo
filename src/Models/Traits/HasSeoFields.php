@@ -4,7 +4,6 @@ namespace Codedor\Seo\Models\Traits;
 
 use Codedor\Seo\Facades\SeoBuilder;
 use Codedor\Seo\Models\SeoField;
-use Codedor\Seo\SeoFieldOptions;
 use Codedor\Seo\SeoTags;
 use Codedor\Seo\Tags\BaseTag;
 use Illuminate\Database\Eloquent\Model;
@@ -52,7 +51,7 @@ trait HasSeoFields
             }
 
             // set correct content translation, now it's always "en"
-//            dump($seoField->content);
+            //            dump($seoField->content);
             $tag->content($tag->isTranslatable() ? $seoField->getTranslation('content', $locale) : $seoField->content);
 
             return [

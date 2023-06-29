@@ -21,7 +21,8 @@ class BaseTag implements Tag
         protected string $key,
         protected string|Closure|null $defaultAttribute,
         protected array $settings = []
-    ) {}
+    ) {
+    }
 
     public static function make(
         Model $model,
@@ -103,7 +104,7 @@ class BaseTag implements Tag
             return app()->call(
                 $this->defaultAttribute,
                 [
-                    'locale' => $locale
+                    'locale' => $locale,
                 ]
             );
         }
