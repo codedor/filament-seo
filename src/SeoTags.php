@@ -2,9 +2,7 @@
 
 namespace Codedor\Seo;
 
-use Codedor\Seo\Models\SeoField;
 use Codedor\Seo\Tags\BaseTag;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 class SeoTags extends Collection

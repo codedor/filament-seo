@@ -2,7 +2,6 @@
 
 use Codedor\Seo\Facades\SeoBuilder;
 use Codedor\Seo\Models\SeoField;
-use Codedor\Seo\SeoFieldOptions;
 use Codedor\Seo\Tags\BaseTag;
 use Codedor\Seo\Tests\Fixtures\Models\Page;
 

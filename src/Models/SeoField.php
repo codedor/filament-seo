@@ -3,7 +3,6 @@
 namespace Codedor\Seo\Models;
 
 use Codedor\Seo\Models\Casts\StringOrArrayCast;
-use Codedor\Seo\Tags\Meta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\Translatable\HasTranslations;
