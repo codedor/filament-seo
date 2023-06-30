@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\Translatable\HasTranslations;
 
+/**
+ * @property string $model_type
+ * @property string $model_id
+ * @property string $locale
+ * @property string $type
+ * @property string $name
+ * @property string $content
+ * @property string $is_translatable
+ */
 class SeoField extends Model
 {
     use HasTranslations;

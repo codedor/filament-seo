@@ -16,6 +16,8 @@ class BaseTag implements Tag
 
     protected bool $isTranslatable = false;
 
+    protected string $content = '';
+
     public function __construct(
         protected Model $model,
         protected string $key,
@@ -30,7 +32,7 @@ class BaseTag implements Tag
         string|Closure|null $defaultAttribute = null,
         array $settings = []
     ): self {
-        return new static($model, $key, $defaultAttribute, $settings);
+        return new self($model, $key, $defaultAttribute, $settings);
     }
 
     public function beforeSave(?string $content): ?string
@@ -91,12 +93,6 @@ class BaseTag implements Tag
         return $this->content ?? '';
     }
 
-    public function defaultContent(string|Closure|null $defaultContent): self
-    {
-        $this->defaultContent = $defaultContent;
-
-        return $this;
-    }
 
     public function getDefaultContent(?string $locale = null): string|Closure|null
     {

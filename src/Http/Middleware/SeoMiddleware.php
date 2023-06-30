@@ -41,7 +41,7 @@ class SeoMiddleware
             SeoRoutes::build($seoRoute, $entity);
         }
 
-        if ($entity) {
+        if ($entity && method_exists($entity, 'withSeoFields')) {
             $entity->withSeoFields();
         }
 

@@ -31,7 +31,7 @@ class SeoRouteResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            TranslatableTabs::make('Translations')
+            TranslatableTabs::make()
                 ->defaultFields([
                     TextInput::make('route')->disabled(),
                     TextInput::make('og_type'),

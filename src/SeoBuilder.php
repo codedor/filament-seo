@@ -44,7 +44,7 @@ class SeoBuilder extends Collection
             ->implode('');
     }
 
-    public function contents(): self
+    public function contents(): Collection
     {
         return $this->map->getContent();
     }
