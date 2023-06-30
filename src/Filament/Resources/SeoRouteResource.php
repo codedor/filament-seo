@@ -2,25 +2,16 @@
 
 namespace Codedor\Seo\Filament\Resources;
 
-use Closure;
 use Codedor\Attachments\Components\Fields\AttachmentInput;
 use Codedor\Attachments\Tables\Columns\AttachmentColumn;
-use Codedor\FilamentArchitect\Filament\Fields\Architect;
-use Codedor\LinkPicker\Forms\Components\LinkPickerInput;
 use Codedor\LocaleCollection\Facades\LocaleCollection;
 use Codedor\LocaleCollection\Locale;
 use Codedor\Seo\Models\SeoRoute;
-use Codedor\Seo\Tags\BaseTag;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Codedor\TranslatableTabs\Tables\LocalesColumn;
-use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\Group;
-use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
