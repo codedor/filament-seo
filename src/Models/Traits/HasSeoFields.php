@@ -50,9 +50,7 @@ trait HasSeoFields
                 return [];
             }
 
-            // set correct content translation, now it's always "en"
-            //            dump($seoField->content);
-            $tag->content($tag->isTranslatable() ? $seoField->getTranslation('content', $locale) : $seoField->content);
+            $tag->content($tag->isTranslatable() ? $seoField->getTranslation('content', $locale, false) : $seoField->content);
 
             return [
                 $tag->getIdentifier() => $tag->getContent(),

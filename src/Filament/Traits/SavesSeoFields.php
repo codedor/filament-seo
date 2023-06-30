@@ -2,6 +2,9 @@
 
 namespace Codedor\Seo\Filament\Traits;
 
+use Codedor\LocaleCollection\Facades\LocaleCollection;
+use Codedor\LocaleCollection\Locale;
+
 trait SavesSeoFields
 {
     public function afterSave()
@@ -33,6 +36,12 @@ trait SavesSeoFields
 
         $this->record->saveSeoFieldState($seoFieldState);
 
+        $this->record->refresh();
+
         $this->data['seoFields'] = $this->record->fillSeoFieldState();
+
+        LocaleCollection::each(function (Locale $locale) {
+            $this->data[$locale->locale()]['seoFields'] = $this->record->fillSeoFieldState($locale->locale());
+        });
     }
 }
