@@ -6,6 +6,7 @@ use Closure;
 use Codedor\Seo\Models\SeoRoute;
 use Codedor\Seo\SeoRoutes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class SeoMiddleware
 {
@@ -27,12 +28,20 @@ class SeoMiddleware
             ->filter(fn ($entity) => $entity instanceof Model)
             ->last();
 
-        $seoRoute = SeoRoute::where('route', $route->getName())
+        $routeName = $route->getName();
+        if (isset($route->wheres['translatable_prefix'])) {
+            $routeName = Str::after($routeName, $route->wheres['translatable_prefix'] . '.');
+        }
+
+        $seoRoute = SeoRoute::where('route', $routeName)
+            ->where('online->' . app()->getLocale(), true)
             ->first();
 
         if ($seoRoute) {
             SeoRoutes::build($seoRoute, $entity);
         }
+
+        $entity->withSeoFields();
 
         return $next($request);
     }

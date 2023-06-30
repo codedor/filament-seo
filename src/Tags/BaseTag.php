@@ -27,7 +27,7 @@ class BaseTag implements Tag
     public static function make(
         Model $model,
         string $key,
-        string|Closure|null $defaultAttribute,
+        string|Closure|null $defaultAttribute = null,
         array $settings = []
     ): self {
         return new static($model, $key, $defaultAttribute, $settings);

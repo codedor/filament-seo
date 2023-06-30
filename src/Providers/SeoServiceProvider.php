@@ -6,7 +6,9 @@ use Codedor\Attachments\Facades\Models;
 use Codedor\Seo\Console\Commands\ImportSeoRoutes;
 use Codedor\Seo\Filament\Resources\SeoRouteResource;
 use Codedor\Seo\Models\SeoRoute;
+use Codedor\Seo\SeoBuilder;
 use Filament\PluginServiceProvider;
+use Illuminate\Support\Facades\Blade;
 use Spatie\LaravelPackageTools\Package;
 
 class SeoServiceProvider extends PluginServiceProvider
@@ -33,9 +35,13 @@ class SeoServiceProvider extends PluginServiceProvider
         parent::packageBooted();
 
         $this->app->bind('seo', function () {
-            return new \Codedor\Seo\SeoBuilder();
+            return new SeoBuilder();
         });
 
         Models::add(SeoRoute::class);
+
+        Blade::directive('seo', function (string $expression) {
+            return "<?php echo \Codedor\Seo\Facades\SeoBuilder::render(); ?>";
+        });
     }
 }

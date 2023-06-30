@@ -41,6 +41,11 @@ class SeoRoute extends Model
 
     public static function getFormats(Collection $formats): Collection
     {
-        return $formats->add(OgImage::make('og_image'));
+        return $formats->add(OgImage::make('og-image'));
+    }
+
+    public function useFallbackLocale(): bool
+    {
+        return false;
     }
 }

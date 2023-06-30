@@ -34,7 +34,15 @@ trait HasSeoFields
      */
     public function withSeoFields()
     {
-        SeoBuilder::tags($this->seoFields->toArray());
+        SeoBuilder::tags(
+            $this->seoFields
+                ->map(fn (SeoField $seoField) => [
+                    'type' => $seoField->type,
+                    'name' => $seoField->name,
+                    'content' => $seoField->content,
+                ])
+                ->toArray()
+        );
     }
 
     public function fillSeoFieldState(?string $locale = null)

@@ -55,7 +55,7 @@ class SeoRoutes
 
     public static function build(SeoRoute $seoRoute, ?Model $entity)
     {
-        $tags = [
+        SeoBuilder::tags([
             [
                 'type' => OpenGraph::class,
                 'name' => 'type',
@@ -86,9 +86,7 @@ class SeoRoutes
                 'name' => 'description',
                 'content' => self::fillPlaceholders($seoRoute->meta_description, $entity),
             ],
-        ];
-
-        SeoBuilder::tags($tags);
+        ]);
     }
 
     public static function fillPlaceholders(?string $text, ?Model $entity)

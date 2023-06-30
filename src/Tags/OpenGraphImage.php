@@ -18,14 +18,13 @@ class OpenGraphImage extends OpenGraph
             return $content;
         }
 
-        return $content;
-        // $attachment = Attachment::find($this->content);
+        $attachment = \Codedor\Attachments\Models\Attachment::find($this->content);
 
-        // if (! $attachment) {
-        //     return '';
-        // }
+        if (! $attachment) {
+            return '';
+        }
 
-        // return $attachment->getFormatOrOriginal('og_image');
+         return $attachment->getFormatOrOriginal('og-image');
     }
 
     public function beforeSave(?string $content): ?string

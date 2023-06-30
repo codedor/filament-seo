@@ -2,6 +2,7 @@
 
 namespace Codedor\Seo;
 
+use Codedor\Seo\Models\SeoRoute;
 use Codedor\Seo\Tags\Tag;
 
 class SeoBuilder
@@ -25,17 +26,22 @@ class SeoBuilder
     public function tag(Tag $item): void
     {
         // Use key as unique identifier, so we can't add multiple tags with same name/property
-        $this->items->put($item->identifier(), $item);
+        $this->items->put($item->getIdentifier(), $item);
     }
 
-    /**
-     * Add multiple tags to the items
-     */
-    public function tags(array $items): void
+    /** Convert arrays with key: type, name, content to a tag class */
+    public function tags(array $items, bool $overwrite = true)
     {
         collect($items)
-            ->each(function ($tag) {
-                $this->tag($tag);
+            ->map(fn (array $item) => $item['type']::make(
+                new SeoRoute(),
+                $item['name']
+            )->content($item['content']))
+            ->each(function (Tag $tag) use ($overwrite) {
+                $exists = $this->items->has($tag->getIdentifier());
+                if (($exists && $overwrite) || ! $exists) {
+                    $this->tag($tag);
+                }
             });
     }
 
@@ -47,27 +53,8 @@ class SeoBuilder
         $this->setDefaults();
 
         return $this->items
-            ->map(fn (Tag $tag) => $tag->render())
-            ->implode('');
-    }
-
-    /**
-     * Return the tags as collection
-     */
-    public function getTags(): object
-    {
-        return $this->items
-            ->map(fn ($tag) => $tag->content());
-    }
-
-    /**
-     * Return the tag content
-     *
-     * @param  string  $tagName (like 'meta_title')
-     */
-    public function getTag($tagName): string
-    {
-        return isset($this->items[$tagName]) ? $this->items[$tagName]->content() : '';
+            ->map->render()
+            ->implode(' ');
     }
 
     /**
