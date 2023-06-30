@@ -2,8 +2,6 @@
 
 namespace Codedor\Seo\Tags;
 
-use Codedor\Media\Models\Attachment;
-
 class OpenGraphImage extends OpenGraph
 {
     public function getContent(bool $raw = false): string
@@ -24,7 +22,7 @@ class OpenGraphImage extends OpenGraph
             return '';
         }
 
-         return $attachment->getFormatOrOriginal('og-image');
+        return $attachment->getFormatOrOriginal('og-image');
     }
 
     public function beforeSave(?string $content): ?string
