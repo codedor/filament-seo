@@ -57,10 +57,12 @@ it('can list the seo routes and excludes routes without name', function () {
 });
 
 it('can build for a given route and no entity', function () {
+    $attachment = \Codedor\Attachments\Models\Attachment::factory()->create();
+
     $seoRoute = SeoRoute::create([
         'route' => 'route.name',
         'og_type' => 'website',
-        'og_image' => 'image.jpg',
+        'og_image' => $attachment->id,
         'online' => true,
         'og_title' => 'og title',
         'og_description' => 'og description',
@@ -70,10 +72,10 @@ it('can build for a given route and no entity', function () {
 
     SeoRoutes::build($seoRoute, null);
 
-    expect(SeoBuilder::getTags())
+    expect(SeoBuilder::contents())
         ->toArray()->toBe([
             'og_type' => 'website',
-            'og_image' => 'image.jpg',
+            'og_image' => $attachment->getFormatOrOriginal('og-image'),
             'og_title' => 'og title',
             'og_description' => 'og description',
             'meta_title' => 'meta title',
@@ -82,10 +84,12 @@ it('can build for a given route and no entity', function () {
 });
 
 it('can build for a given route and an entity', function () {
+    $attachment = \Codedor\Attachments\Models\Attachment::factory()->create();
+
     $seoRoute = SeoRoute::create([
         'route' => 'route.name',
         'og_type' => 'website',
-        'og_image' => 'image.jpg',
+        'og_image' => $attachment->id,
         'online' => true,
         'og_title' => 'og {{ title }}',
         'og_description' => 'og {{ description }}',
@@ -100,10 +104,10 @@ it('can build for a given route and an entity', function () {
 
     SeoRoutes::build($seoRoute, $page);
 
-    expect(SeoBuilder::getTags())
+    expect(SeoBuilder::contents())
         ->toArray()->toBe([
             'og_type' => 'website',
-            'og_image' => 'image.jpg',
+            'og_image' => $attachment->getFormatOrOriginal('og-image'),
             'og_title' => 'og Page title',
             'og_description' => 'og Page description',
             'meta_title' => 'meta Page title',

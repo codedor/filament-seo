@@ -38,7 +38,14 @@ it('will delete the seo fields if main model is deleted', function () {
 it('sets the seo builder tags', function () {
     SeoBuilder::shouldReceive('tags')
         ->once()
-        ->with($this->page->seoFields->toArray());
+        ->with($this->page->seoFields
+            ->map(fn (SeoField $seoField) => [
+                'type' => $seoField->type,
+                'name' => $seoField->name,
+                'content' => $seoField->content,
+            ])
+            ->toArray()
+        );
 
     $this->page->withSeoFields();
 });

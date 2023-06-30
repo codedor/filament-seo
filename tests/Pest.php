@@ -2,4 +2,4 @@
 
 use Codedor\Seo\Tests\TestCase;
 
-uses(TestCase::class)->in('Feature');
+uses(TestCase::class, \Illuminate\Foundation\Testing\RefreshDatabase::class)->in('Feature');

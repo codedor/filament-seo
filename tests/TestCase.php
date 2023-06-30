@@ -2,10 +2,13 @@
 
 namespace Codedor\Seo\Tests;
 
+use Codedor\Attachments\Providers\AttachmentServiceProvider;
 use Codedor\Seo\Providers\SeoServiceProvider;
+use Filament\FilamentServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -23,6 +26,9 @@ class TestCase extends Orchestra
     {
         return [
             SeoServiceProvider::class,
+            LivewireServiceProvider::class,
+            AttachmentServiceProvider::class,
+            FilamentServiceProvider::class,
         ];
     }
 
@@ -36,11 +42,5 @@ class TestCase extends Orchestra
             $table->string('title');
             $table->text('description');
         });
-
-        $migrationFields = require __DIR__ . '/../database/migrations/create_seo_fields_table.php';
-        $migrationRoutes = require __DIR__ . '/../database/migrations/create_seo_routes_table.php';
-
-        $migrationFields->up();
-        $migrationRoutes->up();
     }
 }

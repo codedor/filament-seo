@@ -46,7 +46,7 @@ class SeoRoutes
                     'as' => $routeName,
                     'methods' => $route->methods,
                     'action' => $route->action['uses'] ?? '',
-                    'middleware' => $routeName,
+                    'middleware' => $routeMiddleware,
                 ];
             })
             ->unique('as')

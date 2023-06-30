@@ -4,29 +4,17 @@ namespace Codedor\Seo;
 
 use Codedor\Seo\Models\SeoRoute;
 use Codedor\Seo\Tags\Tag;
+use Illuminate\Support\Collection;
 
-class SeoBuilder
+class SeoBuilder extends Collection
 {
-    /** var Collection */
-    public $items;
-
-    /**
-     * Create a new SeoBuilder instance
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->items = collect([]);
-    }
-
     /**
      * Add a tag to the items
      */
     public function tag(Tag $item): void
     {
         // Use key as unique identifier, so we can't add multiple tags with same name/property
-        $this->items->put($item->getIdentifier(), $item);
+        $this->put($item->getIdentifier(), $item);
     }
 
     /** Convert arrays with key: type, name, content to a tag class */
@@ -38,7 +26,7 @@ class SeoBuilder
                 $item['name']
             )->content($item['content']))
             ->each(function (Tag $tag) use ($overwrite) {
-                $exists = $this->items->has($tag->getIdentifier());
+                $exists = $this->has($tag->getIdentifier());
                 if (($exists && $overwrite) || ! $exists) {
                     $this->tag($tag);
                 }
@@ -52,9 +40,13 @@ class SeoBuilder
     {
         $this->setDefaults();
 
-        return $this->items
-            ->map->render()
-            ->implode(' ');
+        return $this->map->render()
+            ->implode('');
+    }
+
+    public function contents(): self
+    {
+        return $this->map->getContent();
     }
 
     /**

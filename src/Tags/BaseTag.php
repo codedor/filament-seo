@@ -19,7 +19,7 @@ class BaseTag implements Tag
     public function __construct(
         protected Model $model,
         protected string $key,
-        protected string|Closure|null $defaultAttribute,
+        protected string|Closure|null $defaultAttribute = null,
         protected array $settings = []
     ) {
     }

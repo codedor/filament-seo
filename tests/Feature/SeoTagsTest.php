@@ -14,15 +14,15 @@ it('can make an instance', function () {
 });
 
 it('can add a tag', function () {
-    $this->seoTags->add(new BaseTag(new Page(), 'base_tag', 'default'));
+    $this->seoTags->add(BaseTag::make(new Page(), 'base_tag'));
 
     expect($this->seoTags)
         ->toHaveCount(1);
 });
 
 it('can return a tag when a type and key are given', function () {
-    $tag1 = new BaseTag(new Page(), 'base_tag', 'default');
-    $tag2 = new BaseTag(new Page(), 'base_tag_2', 'default_2');
+    $tag1 = BaseTag::make(new Page(), 'base_tag', 'default');
+    $tag2 = BaseTag::make(new Page(), 'base_tag_2', 'default_2');
 
     $this->seoTags->add($tag1);
     $this->seoTags->add($tag2);

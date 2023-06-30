@@ -41,7 +41,9 @@ class SeoMiddleware
             SeoRoutes::build($seoRoute, $entity);
         }
 
-        $entity->withSeoFields();
+        if ($entity) {
+            $entity->withSeoFields();
+        }
 
         return $next($request);
     }
