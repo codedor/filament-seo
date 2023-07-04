@@ -2,8 +2,8 @@
 
 namespace Codedor\Seo\Filament\Resources;
 
-use Codedor\Attachments\Components\Fields\AttachmentInput;
-use Codedor\Attachments\Tables\Columns\AttachmentColumn;
+use Codedor\MediaLibrary\Components\Fields\AttachmentInput;
+use Codedor\MediaLibrary\Tables\Columns\AttachmentColumn;
 use Codedor\LocaleCollection\Facades\LocaleCollection;
 use Codedor\LocaleCollection\Locale;
 use Codedor\Seo\Models\SeoRoute;

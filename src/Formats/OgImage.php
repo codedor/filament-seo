@@ -2,7 +2,7 @@
 
 namespace Codedor\Seo\Formats;
 
-use Codedor\Attachments\Formats\Format;
+use Codedor\MediaLibrary\Formats\Format;
 
 class OgImage extends Format
 {

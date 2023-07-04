@@ -2,7 +2,7 @@
 
 namespace Codedor\Seo\Providers;
 
-use Codedor\Attachments\Facades\Models;
+use Codedor\MediaLibrary\Facades\Models;
 use Codedor\Seo\Console\Commands\ImportSeoRoutes;
 use Codedor\Seo\Filament\Resources\SeoRouteResource;
 use Codedor\Seo\Models\SeoRoute;

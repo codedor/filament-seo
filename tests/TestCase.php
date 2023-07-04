@@ -2,7 +2,7 @@
 
 namespace Codedor\Seo\Tests;
 
-use Codedor\Attachments\Providers\AttachmentServiceProvider;
+use Codedor\MediaLibrary\Providers\MediaLibraryServiceProvider;
 use Codedor\Seo\Providers\SeoServiceProvider;
 use Filament\FilamentServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -27,7 +27,7 @@ class TestCase extends Orchestra
         return [
             SeoServiceProvider::class,
             LivewireServiceProvider::class,
-            AttachmentServiceProvider::class,
+            MediaLibraryServiceProvider::class,
             FilamentServiceProvider::class,
         ];
     }

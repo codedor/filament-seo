@@ -18,7 +18,7 @@ class BaseTag implements Tag
 
     protected string $content = '';
 
-    public function __construct(
+    final public function __construct(
         protected Model $model,
         protected string $key,
         protected string|Closure|null $defaultAttribute = null,
@@ -31,8 +31,8 @@ class BaseTag implements Tag
         string $key,
         string|Closure|null $defaultAttribute = null,
         array $settings = []
-    ): self {
-        return new self($model, $key, $defaultAttribute, $settings);
+    ): static {
+        return new static($model, $key, $defaultAttribute, $settings);
     }
 
     public function beforeSave(?string $content): ?string
