@@ -2,10 +2,10 @@
 
 namespace Codedor\Seo\Filament\Resources;
 
-use Codedor\MediaLibrary\Components\Fields\AttachmentInput;
-use Codedor\MediaLibrary\Tables\Columns\AttachmentColumn;
 use Codedor\LocaleCollection\Facades\LocaleCollection;
 use Codedor\LocaleCollection\Locale;
+use Codedor\MediaLibrary\Components\Fields\AttachmentInput;
+use Codedor\MediaLibrary\Tables\Columns\AttachmentColumn;
 use Codedor\Seo\Models\SeoRoute;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
 use Codedor\TranslatableTabs\Tables\LocalesColumn;
