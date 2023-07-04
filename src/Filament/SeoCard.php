@@ -40,12 +40,12 @@ class SeoCard
                         ->disableLabel()
                         ->content('Seo')
                         ->extraAttributes(['class' => 'text-2xl font-bold']),
-                    ...$fields->toArray()
+                    ...$fields->toArray(),
                 ])
-                    ->afterStateHydrated(function (Group $component, ?Model $record) use ($locale) : void {
+                    ->afterStateHydrated(function (Group $component, ?Model $record) use ($locale): void {
                         $component->getChildComponentContainer()->fill($record->fillSeoFieldState($locale));
                     })
-                    ->statePath('seoFields')
+                    ->statePath('seoFields'),
             ]);
     }
 }
