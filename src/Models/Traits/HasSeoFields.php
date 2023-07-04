@@ -61,7 +61,7 @@ trait HasSeoFields
             $tag->content($tag->isTranslatable() ? $seoField->getTranslation('content', $locale, false) : $seoField->content);
 
             return [
-                $tag->getIdentifier() => $tag->getContent(),
+                $tag->getIdentifier() => $tag->getContent(true),
             ];
         })->toArray() ?: [];
     }
