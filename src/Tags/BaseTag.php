@@ -93,7 +93,6 @@ class BaseTag implements Tag
         return $this->content ?? '';
     }
 
-
     public function getDefaultContent(?string $locale = null): string|Closure|null
     {
         if ($this->defaultAttribute instanceof Closure) {
