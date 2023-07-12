@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SeoCard
 {
-    public static function make(string $model, ?string $locale = null): Card
+    public static function make(string $model, string $locale = null): Card
     {
         $model = app($model);
 
