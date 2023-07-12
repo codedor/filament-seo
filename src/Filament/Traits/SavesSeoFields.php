@@ -12,6 +12,11 @@ trait SavesSeoFields
         $this->saveSeoFields();
     }
 
+    public function afterCreate()
+    {
+        $this->saveSeoFields();
+    }
+
     protected function saveSeoFields()
     {
         $state = $this->form->getState();

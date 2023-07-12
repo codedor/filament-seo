@@ -43,7 +43,7 @@ class SeoCard
                     ...$fields->toArray(),
                 ])
                     ->afterStateHydrated(function (Group $component, ?Model $record) use ($locale): void {
-                        $component->getChildComponentContainer()->fill($record->fillSeoFieldState($locale));
+                        $component->getChildComponentContainer()->fill($record?->fillSeoFieldState($locale));
                     })
                     ->statePath('seoFields'),
             ]);
