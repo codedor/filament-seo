@@ -16,7 +16,7 @@ class BaseTag implements Tag
 
     protected bool $isTranslatable = false;
 
-    protected string $content = '';
+    protected ?string $content = '';
 
     final public function __construct(
         protected Model $model,

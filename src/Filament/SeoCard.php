@@ -2,7 +2,7 @@
 
 namespace Codedor\Seo\Filament;
 
-use Codedor\MediaLibrary\Components\Fields\AttachmentInput;
+use Codedor\MediaLibrary\Filament\AttachmentInput;
 use Codedor\Seo\Formats\OgImage;
 use Codedor\Seo\Tags\BaseTag;
 use Codedor\Seo\Tags\OpenGraphImage;
