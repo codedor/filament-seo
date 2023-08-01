@@ -7,11 +7,11 @@ use Codedor\Seo\Console\Commands\ImportSeoRoutes;
 use Codedor\Seo\Filament\Resources\SeoRouteResource;
 use Codedor\Seo\Models\SeoRoute;
 use Codedor\Seo\SeoBuilder;
-use Filament\PluginServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class SeoServiceProvider extends PluginServiceProvider
+class SeoServiceProvider extends PackageServiceProvider
 {
     protected array $resources = [
         SeoRouteResource::class,
