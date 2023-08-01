@@ -6,15 +6,15 @@ use Codedor\MediaLibrary\Filament\AttachmentInput;
 use Codedor\Seo\Formats\OgImage;
 use Codedor\Seo\Tags\BaseTag;
 use Codedor\Seo\Tags\OpenGraphImage;
-use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Illuminate\Database\Eloquent\Model;
 
 class SeoCard
 {
-    public static function make(string $model, string $locale = null): Card
+    public static function make(string $model, string $locale = null): Section
     {
         $model = app($model);
 
@@ -33,7 +33,9 @@ class SeoCard
                     ->rules($tag->getRules());
             });
 
-        return Card::make()->columns(1)->label('Seo')
+        return Section::make()
+            ->columns(1)
+            ->label('Seo')
             ->schema([
                 Group::make([
                     Placeholder::make('Seo')
