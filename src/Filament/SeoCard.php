@@ -37,7 +37,7 @@ class SeoCard
             ->schema([
                 Group::make([
                     Placeholder::make('Seo')
-                        ->disableLabel()
+                        ->hiddenLabel()
                         ->content('Seo')
                         ->extraAttributes(['class' => 'text-2xl font-bold']),
                     ...$fields->toArray(),

@@ -4,7 +4,7 @@ namespace Codedor\Seo\Filament\Resources;
 
 use Codedor\LocaleCollection\Facades\LocaleCollection;
 use Codedor\LocaleCollection\Locale;
-use Codedor\MediaLibrary\Components\Fields\AttachmentInput;
+use Codedor\MediaLibrary\Filament\AttachmentInput;
 use Codedor\MediaLibrary\Tables\Columns\AttachmentColumn;
 use Codedor\Seo\Models\SeoRoute;
 use Codedor\TranslatableTabs\Forms\TranslatableTabs;
@@ -12,9 +12,9 @@ use Codedor\TranslatableTabs\Tables\LocalesColumn;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +24,7 @@ class SeoRouteResource extends Resource
 {
     protected static ?string $model = SeoRoute::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-link';
+    protected static ?string $navigationIcon = 'heroicon-o-presentation-chart-line';
 
     protected static ?string $navigationGroup = 'SEO';
 
