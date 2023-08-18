@@ -1,5 +1,6 @@
 <?php
 
+use Codedor\MediaLibrary\Models\Attachment;
 use Codedor\Seo\Facades\SeoBuilder;
 use Codedor\Seo\Http\Middleware\SeoMiddleware;
 use Codedor\Seo\Models\SeoRoute;
@@ -57,7 +58,9 @@ it('can list the seo routes and excludes routes without name', function () {
 });
 
 it('can build for a given route and no entity', function () {
-    $attachment = \Codedor\MediaLibrary\Models\Attachment::factory()->create();
+    $attachment = Attachment::withoutEvents(function () {
+        return Attachment::factory()->create();
+    });
 
     $seoRoute = SeoRoute::create([
         'route' => 'route.name',
@@ -84,7 +87,9 @@ it('can build for a given route and no entity', function () {
 });
 
 it('can build for a given route and an entity', function () {
-    $attachment = \Codedor\MediaLibrary\Models\Attachment::factory()->create();
+    $attachment = Attachment::withoutEvents(function () {
+        return Attachment::factory()->create();
+    });
 
     $seoRoute = SeoRoute::create([
         'route' => 'route.name',

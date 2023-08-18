@@ -1,0 +1,6 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:fillSeoFieldState\\(\\)\\.$#"
+			count: 1
+			path: src/Filament/SeoCard.php
