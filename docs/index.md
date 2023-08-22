@@ -164,7 +164,7 @@ Route::get('/', HomeController::class)
     ->middleware(\Codedor\Seo\Http\Middleware\SeoMiddleware::class);
 ```
 
-Then run the `php artisan seo:routes` command to add the routes to the database.
+Then run the `php artisan seo:import` command to add the routes to the database.
 We recommend to run this command in your deployment script.
 
 ### Front-end
