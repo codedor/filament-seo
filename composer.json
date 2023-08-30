@@ -10,7 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "codedor/filament-media-library": "^0.1",
+        "codedor/filament-media-library": "^0.2",
         "codedor/filament-translatable-tabs": "^0.1",
         "codedor/laravel-locale-collection": "^0.0",
         "illuminate/contracts": "^10.0",
