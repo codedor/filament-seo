@@ -2,7 +2,7 @@
 
 namespace Codedor\Seo\Providers;
 
-use Codedor\MediaLibrary\Facades\Models;
+use Codedor\MediaLibrary\Facades\Formats;
 use Codedor\Seo\Console\Commands\ImportSeoRoutes;
 use Codedor\Seo\Filament\Resources\SeoRouteResource;
 use Codedor\Seo\Models\SeoRoute;
@@ -38,7 +38,7 @@ class SeoServiceProvider extends PackageServiceProvider
             return new SeoBuilder();
         });
 
-        Models::add(SeoRoute::class);
+        Formats::registerForModel(SeoRoute::class);
 
         Blade::directive('seo', function (string $expression) {
             return "<?php echo \Codedor\Seo\Facades\SeoBuilder::render(); ?>";
