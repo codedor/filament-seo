@@ -2,9 +2,7 @@
 
 namespace Codedor\Seo\Models;
 
-use Codedor\Seo\Formats\OgImage;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 use Spatie\Translatable\HasTranslations;
 
 /**
@@ -38,11 +36,6 @@ class SeoRoute extends Model
         'meta_description',
         'online',
     ];
-
-    public static function getFormats(Collection $formats): Collection
-    {
-        return $formats->add(OgImage::make('og-image'));
-    }
 
     public function useFallbackLocale(): bool
     {
