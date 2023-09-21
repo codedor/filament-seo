@@ -8,6 +8,7 @@ use Codedor\Seo\Models\SeoRoute;
 class OgImage extends Format
 {
     protected string $name = 'OG Image';
+
     protected string $description = 'Format used to display the image for SEO purposes';
 
     public function definition(): \Spatie\Image\Manipulations
