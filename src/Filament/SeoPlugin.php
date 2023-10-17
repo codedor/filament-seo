@@ -8,7 +8,7 @@ use Filament\Panel;
 
 class SeoPlugin implements Plugin
 {
-    protected bool $hasSeoRouteResource = true;
+    protected bool $hasSeoRouteResource = false;
 
     public static function make(): static
     {
