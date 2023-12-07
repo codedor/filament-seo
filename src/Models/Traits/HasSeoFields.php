@@ -45,7 +45,7 @@ trait HasSeoFields
         );
     }
 
-    public function fillSeoFieldState(string $locale = null)
+    public function fillSeoFieldState(?string $locale = null)
     {
         return $this->seoFields->mapWithKeys(function (SeoField $seoField) use ($locale) {
             $tag = $this->getSeoTags()->firstForTypeAndKey($seoField->type, $seoField->name);

@@ -29,7 +29,7 @@ class BaseTag implements Tag
     public static function make(
         Model $model,
         string $key,
-        string|Closure $defaultAttribute = null,
+        string|Closure|null $defaultAttribute = null,
         array $settings = []
     ): static {
         return new static($model, $key, $defaultAttribute, $settings);
@@ -93,7 +93,7 @@ class BaseTag implements Tag
         return $this->content ?? '';
     }
 
-    public function getDefaultContent(string $locale = null): string|Closure|null
+    public function getDefaultContent(?string $locale = null): string|Closure|null
     {
         if ($this->defaultAttribute instanceof Closure) {
             return app()->call(
@@ -122,7 +122,7 @@ class BaseTag implements Tag
         return $this;
     }
 
-    public function getSettings(string $key = null)
+    public function getSettings(?string $key = null)
     {
         if ($key) {
             return $this->settings[$key] ?? null;
