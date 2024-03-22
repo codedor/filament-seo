@@ -56,6 +56,6 @@ class SeoBuilder extends Collection
      */
     protected function setDefaults()
     {
-        $this->tags(config('seo.default', []), false);
+        $this->tags(config('filament-seo.default', []), false);
     }
 }

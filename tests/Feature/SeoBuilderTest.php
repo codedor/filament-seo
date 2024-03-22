@@ -111,6 +111,10 @@ it('can add multiple tag and will not overwrite existing items', function () {
 });
 
 it('can render', function () {
+    config([
+        'filament-seo.default' => [],
+    ]);
+
     $tag = BaseTag::make($this->page, 'key')
         ->content('content');
 
@@ -128,7 +132,7 @@ it('can render with defaults', function () {
     ];
 
     config([
-        'seo.default' => [$defaultTag],
+        'filament-seo.default' => [$defaultTag],
     ]);
 
     $tag = BaseTag::make($this->page, 'key')

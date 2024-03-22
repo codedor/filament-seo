@@ -135,11 +135,11 @@ class BaseTag implements Tag
     {
         $rules = [];
 
-        if (! $this->getSettings('default') && config('seo.rules.default_empty_required')) {
+        if (! $this->getSettings('default') && config('filament-seo.rules.default_empty_required')) {
             $rules[] = 'required';
         }
 
-        $configRules = config('seo.rules.fields.' . $this->getIdentifier(), []);
+        $configRules = config('filament-seo.rules.fields.' . $this->getIdentifier(), []);
 
         return array_merge($rules, $configRules);
     }
