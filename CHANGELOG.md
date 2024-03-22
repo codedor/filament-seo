@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.0.1 - 2023-12-07
+
+### What's Changed
+
+* Bump actions/checkout from 3 to 4 by @dependabot in https://github.com/codedor/filament-seo/pull/9
+* Bump stefanzweifel/git-auto-commit-action from 4 to 5 by @dependabot in https://github.com/codedor/filament-seo/pull/10
+* Use correct config key
+
+**Full Changelog**: https://github.com/codedor/filament-seo/compare/v0.3.1...v1.0.1
+
 ## v0.3.1 - 2023-09-21
 
 ### What's changed
