@@ -24,7 +24,7 @@ it('can save content with a maximum length when length is longer than 255', func
 
 it('can save content with a maximum length when length is set in the rules', function () {
     config([
-        'seo.rules.fields' => [
+        'filament-seo.rules.fields' => [
             'key' => [
                 'max:125',
             ],
@@ -84,18 +84,18 @@ it('has no rules', function () {
         ->getRules()->toBe([]);
 });
 
-it('has a required rule when no default setting and seo.rules.default_empty_required is true', function () {
+it('has a required rule when no default setting and filament-seo.rules.default_empty_required is true', function () {
     config([
-        'seo.rules.default_empty_required' => true,
+        'filament-seo.rules.default_empty_required' => true,
     ]);
 
     expect(BaseTag::make($this->page, 'key', 'content'))
         ->getRules()->toBe(['required']);
 });
 
-it('has no required rule when no default setting and seo.rules.default_empty_required is true', function () {
+it('has no required rule when no default setting and filament-seo.rules.default_empty_required is true', function () {
     config([
-        'seo.rules.default_empty_required' => false,
+        'filament-seo.rules.default_empty_required' => false,
     ]);
 
     expect(BaseTag::make($this->page, 'key', 'content'))
@@ -104,7 +104,7 @@ it('has no required rule when no default setting and seo.rules.default_empty_req
 
 it('can set rules via the config', function () {
     config([
-        'seo.rules.fields.key' => [
+        'filament-seo.rules.fields.key' => [
             'max:100',
             'required',
         ],
