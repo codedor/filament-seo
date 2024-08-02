@@ -4,7 +4,7 @@ use Codedor\Seo\Models\SeoField;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 it('has fillable fields', function () {
-    $seoField = new SeoField();
+    $seoField = new SeoField;
 
     expect($seoField)
         ->fillable->toBe([
@@ -19,7 +19,7 @@ it('has fillable fields', function () {
 });
 
 it('has a morph to relationship', function () {
-    $seoField = new SeoField();
+    $seoField = new SeoField;
 
     expect($seoField)
         ->model()->toBeInstanceOf(MorphTo::class);

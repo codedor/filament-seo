@@ -35,7 +35,7 @@ class SeoServiceProvider extends PackageServiceProvider
         parent::packageBooted();
 
         $this->app->bind('seo', function () {
-            return new SeoBuilder();
+            return new SeoBuilder;
         });
 
         Formats::register(OgImage::class);

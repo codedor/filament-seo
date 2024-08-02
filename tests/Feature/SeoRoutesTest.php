@@ -9,7 +9,7 @@ use Codedor\Seo\Tests\Fixtures\Models\Page;
 use Illuminate\Support\Facades\Route;
 
 beforeEach(function () {
-    $this->seoRoutes = new SeoRoutes();
+    $this->seoRoutes = new SeoRoutes;
 });
 
 it('can list the seo routes when no routes are given', function () {
