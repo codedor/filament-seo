@@ -23,8 +23,7 @@ class BaseTag implements Tag
         protected string $key,
         protected string|Closure|null $defaultAttribute = null,
         protected array $settings = []
-    ) {
-    }
+    ) {}
 
     public static function make(
         Model $model,

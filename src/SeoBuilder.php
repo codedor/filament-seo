@@ -22,7 +22,7 @@ class SeoBuilder extends Collection
     {
         collect($items)
             ->map(fn (array $item) => $item['type']::make(
-                new SeoRoute(),
+                new SeoRoute,
                 $item['name']
             )->content($item['content']))
             ->each(function (Tag $tag) use ($overwrite) {

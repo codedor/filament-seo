@@ -29,10 +29,7 @@ class SeoPlugin implements Plugin
         }
     }
 
-    public function boot(Panel $panel): void
-    {
-
-    }
+    public function boot(Panel $panel): void {}
 
     public function seoRouteResource(bool $condition = true): static
     {
