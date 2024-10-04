@@ -10,7 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2|^8.3",
-        "codedor/filament-media-library": "dev-feature/laravel-11-support",
+        "codedor/filament-media-library": "^2.0",
         "codedor/filament-translatable-tabs": "^1.0",
         "codedor/laravel-locale-collection": "^1.0",
         "illuminate/contracts": "^10.0|^11.0",
@@ -20,7 +20,7 @@
     "require-dev": {
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^7.0|^8.0",
-        "nunomaduro/larastan": "^2.0",
+        "larastan/larastan": "^2.0",
         "orchestra/testbench": "^8.0|^9.0",
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
