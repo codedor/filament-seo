@@ -3,7 +3,10 @@
 namespace Codedor\Seo\Formats;
 
 use Codedor\MediaLibrary\Formats\Format;
+use Codedor\MediaLibrary\Formats\Manipulations;
 use Codedor\Seo\Models\SeoRoute;
+use Spatie\Image\Drivers\ImageDriver;
+use Spatie\Image\Enums\Fit;
 
 class OgImage extends Format
 {
@@ -11,10 +14,9 @@ class OgImage extends Format
 
     protected string $description = 'Format used to display the image for SEO purposes';
 
-    public function definition(): \Spatie\Image\Manipulations
+    public function definition(): Manipulations|ImageDriver
     {
-        return $this->manipulations
-            ->fit(\Spatie\Image\Manipulations::FIT_CONTAIN, 1200, 630);
+        return $this->manipulations->fit(Fit::Contain, 1200, 630);
     }
 
     public function registerModelsForFormatter(): void
