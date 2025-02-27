@@ -1,6 +1,14 @@
 parameters:
-	ignoreErrors:
-		-
-			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:fillSeoFieldState\\(\\)\\.$#"
-			count: 1
-			path: src/Filament/SeoCard.php
+    ignoreErrors:
+        -
+            message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:fillSeoFieldState\\(\\)\\.$#"
+            count: 1
+            path: src/Filament/SeoCard.php
+        -
+            identifier: trait.unused
+            count: 1
+            path: src/Filament/Traits/SavesSeoFields.php
+        -
+            identifier: trait.unused
+            count: 1
+            path: src/Models/Traits/HasSeoFields.php
