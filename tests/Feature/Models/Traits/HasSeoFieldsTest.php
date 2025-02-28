@@ -59,13 +59,13 @@ it('can save the seo field state', function () {
     $this->assertDatabaseHas(SeoField::class, [
         'type' => BaseTag::class,
         'name' => 'title',
-        'content' => 'new title',
+        'content' => json_encode('new title'),
     ]);
 
     $this->assertDatabaseHas(SeoField::class, [
         'type' => BaseTag::class,
         'name' => 'description',
-        'content' => 'new description',
+        'content' => json_encode('new description'),
     ]);
 });
 
@@ -78,13 +78,13 @@ it('skips the seo fields that are not in the state', function () {
     $this->assertDatabaseHas(SeoField::class, [
         'type' => BaseTag::class,
         'name' => 'title',
-        'content' => 'seo title',
+        'content' => json_encode('seo title'),
     ]);
 
     $this->assertDatabaseHas(SeoField::class, [
         'type' => BaseTag::class,
         'name' => 'description',
-        'content' => 'new description',
+        'content' => json_encode('new description'),
     ]);
 });
 
@@ -96,14 +96,14 @@ it('will use the default value if content is empty', function () {
     $this->assertDatabaseHas(SeoField::class, [
         'type' => BaseTag::class,
         'name' => 'title',
-        'content' => 'title',
+        'content' => json_encode('title'),
     ]);
 });
 
 it('can init the seo', function () {
     $page = Page::create([
         'title' => 'Title',
-        'description' => 'Description',
+        'description' => json_encode('Description'),
     ]);
 
     // 2 from beforeEach
@@ -118,7 +118,7 @@ it('can init the seo', function () {
         'model_id' => $page->id,
         'type' => BaseTag::class,
         'name' => 'title',
-        'content' => 'Title',
+        'content' => json_encode('Title'),
     ]);
 
     $this->assertDatabaseHas(SeoField::class, [
@@ -126,6 +126,6 @@ it('can init the seo', function () {
         'model_id' => $page->id,
         'type' => BaseTag::class,
         'name' => 'description',
-        'content' => '',
+        'content' => json_encode(''),
     ]);
 });
