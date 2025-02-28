@@ -20,8 +20,6 @@ class StringOrArrayCast implements CastsAttributes
 
     public function set($model, $key, $value, $attributes)
     {
-        dump($value);
-
         return [
             $key => is_array($value) ? Json::encode($value) : $value,
         ];
