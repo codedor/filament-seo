@@ -12,9 +12,7 @@ use Codedor\TranslatableTabs\Tables\LocalesColumn;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -24,13 +22,13 @@ class SeoRouteResource extends Resource
 {
     protected static ?string $model = SeoRoute::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-presentation-chart-line';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-presentation-chart-line';
 
-    protected static ?string $navigationGroup = 'SEO';
+    protected static string|\UnitEnum|null $navigationGroup = 'SEO';
 
-    public static function form(Form $form): Form
+    public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
     {
-        return $form->schema([
+        return $schema->components([
             TranslatableTabs::make()
                 ->defaultFields([
                     TextInput::make('route')->disabled(),
@@ -76,7 +74,7 @@ class SeoRouteResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                \Filament\Actions\EditAction::make(),
             ])
             ->bulkActions([]);
     }

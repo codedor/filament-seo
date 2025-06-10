@@ -6,15 +6,13 @@ use Codedor\MediaLibrary\Filament\AttachmentInput;
 use Codedor\Seo\Formats\OgImage;
 use Codedor\Seo\Tags\BaseTag;
 use Codedor\Seo\Tags\OpenGraphImage;
-use Filament\Forms\Components\Group;
-use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
+use Filament\Infolists\Components\TextEntry;
 use Illuminate\Database\Eloquent\Model;
 
 class SeoCard
 {
-    public static function make(string $model, ?string $locale = null): Section
+    public static function make(string $model, ?string $locale = null): \Filament\Schemas\Components\Section
     {
         $model = app($model);
 
@@ -33,19 +31,19 @@ class SeoCard
                     ->rules($tag->getRules());
             });
 
-        return Section::make()
+        return \Filament\Schemas\Components\Section::make()
             ->columns(1)
             ->label('Seo')
             ->schema([
-                Group::make([
-                    Placeholder::make('Seo')
+                \Filament\Schemas\Components\Group::make([
+                    TextEntry::make('Seo')
                         ->hiddenLabel()
-                        ->content('Seo')
+                        ->state('Seo')
                         ->extraAttributes(['class' => 'text-2xl font-bold']),
                     ...$fields->toArray(),
                 ])
-                    ->afterStateHydrated(function (Group $component, ?Model $record) use ($locale): void {
-                        $component->getChildComponentContainer()->fill($record?->fillSeoFieldState($locale));
+                    ->afterStateHydrated(function (\Filament\Schemas\Components\Group $component, ?Model $record) use ($locale): void {
+                        $component->getChildSchema()->fill($record?->fillSeoFieldState($locale));
                     })
                     ->statePath('seoFields'),
             ]);
