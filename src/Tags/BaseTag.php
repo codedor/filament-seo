@@ -55,7 +55,7 @@ class BaseTag implements Tag
 
     public function getKey(): string
     {
-        return $this->key ?? '';
+        return $this->key;
     }
 
     public function getModel(): Model
