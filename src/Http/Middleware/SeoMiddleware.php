@@ -4,6 +4,7 @@ namespace Wotz\Seo\Http\Middleware;
 
 use Closure;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Wotz\Seo\Models\SeoRoute;
 use Wotz\Seo\SeoRoutes;
@@ -13,7 +14,7 @@ class SeoMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return mixed
      */
     public function handle($request, Closure $next)

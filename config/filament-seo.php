@@ -1,5 +1,6 @@
 <?php
 
+use Wotz\Seo\Models\SeoRoute;
 use Wotz\Seo\Tags\Meta;
 use Wotz\Seo\Tags\OgUrl;
 use Wotz\Seo\Tags\OpenGraph;
@@ -7,7 +8,7 @@ use Wotz\Seo\Tags\OpenGraphImage;
 
 return [
     'models' => [
-        'seo-route' => \Wotz\Seo\Models\SeoRoute::class,
+        'seo-route' => SeoRoute::class,
     ],
     'default' => [
         'title_og' => [

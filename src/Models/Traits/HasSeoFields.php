@@ -3,6 +3,7 @@
 namespace Wotz\Seo\Models\Traits;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Wotz\Seo\Facades\SeoBuilder;
 use Wotz\Seo\Models\SeoField;
 use Wotz\Seo\SeoTags;
@@ -22,7 +23,7 @@ trait HasSeoFields
     /**
      * Set the polymorphic relation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return MorphMany
      */
     public function seoFields()
     {

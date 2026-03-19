@@ -2,6 +2,8 @@
 
 namespace Wotz\Seo\Tags;
 
+use Wotz\MediaLibrary\Models\Attachment;
+
 class OpenGraphImage extends OpenGraph
 {
     public function getContent(bool $raw = false): string
@@ -16,7 +18,7 @@ class OpenGraphImage extends OpenGraph
             return $content;
         }
 
-        $attachment = \Wotz\MediaLibrary\Models\Attachment::find($this->content);
+        $attachment = Attachment::find($this->content);
 
         if (! $attachment) {
             return '';

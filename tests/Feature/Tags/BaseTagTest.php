@@ -3,9 +3,10 @@
 use Illuminate\Support\Str;
 use Wotz\Seo\Tags\BaseTag;
 use Wotz\Seo\Tags\Tag;
+use Wotz\Seo\Tests\Fixtures\Models\Page;
 
 beforeEach(function () {
-    $this->page = new \Wotz\Seo\Tests\Fixtures\Models\Page;
+    $this->page = new Page;
 });
 
 it('can construct a class', function () {
