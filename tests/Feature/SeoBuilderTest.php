@@ -2,10 +2,11 @@
 
 use Wotz\Seo\SeoBuilder;
 use Wotz\Seo\Tags\BaseTag;
+use Wotz\Seo\Tests\Fixtures\Models\Page;
 
 beforeEach(function () {
     $this->seoBuilder = new SeoBuilder;
-    $this->page = new \Wotz\Seo\Tests\Fixtures\Models\Page;
+    $this->page = new Page;
 });
 
 it('can add a tag', function () {

@@ -2,10 +2,12 @@
 
 namespace Wotz\Seo\Filament\Resources;
 
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -26,7 +28,7 @@ class SeoRouteResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'SEO';
 
-    public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
+    public static function form(Schema $schema): Schema
     {
         return $schema->components([
             TranslatableTabs::make()
@@ -73,10 +75,10 @@ class SeoRouteResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                \Filament\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([]);
+            ->toolbarActions([]);
     }
 
     public static function getPages(): array

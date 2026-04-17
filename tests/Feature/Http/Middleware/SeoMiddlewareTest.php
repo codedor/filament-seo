@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Wotz\Seo\Facades\SeoBuilder;
 use Wotz\Seo\Http\Middleware\SeoMiddleware;
+use Wotz\Seo\Models\SeoRoute;
 
 it('will not the seo routes if no route is found', function () {
     Route::get('', fn () => 'route');
@@ -19,7 +20,7 @@ it('will build the seo routes when route matches', function () {
     $route = Route::get('test', fn () => 'route')
         ->name('test');
 
-    \Wotz\Seo\Models\SeoRoute::create([
+    SeoRoute::create([
         'route' => 'test',
         'og_type' => 'site',
         'description' => 'test',
