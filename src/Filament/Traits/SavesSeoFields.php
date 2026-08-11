@@ -25,18 +25,20 @@ trait SavesSeoFields
             return;
         }
 
+        $locales = LocaleCollection::map(fn (Locale $locale) => $locale->locale())->all();
+
         $seoFieldState = [];
 
-        foreach ($state as $key => $value) {
-            if ($key === 'seoFields') {
-                $seoFieldState += $value;
-            }
-
-            if (is_array($value) && array_key_exists('seoFields', $value)) {
-                foreach ($value['seoFields'] as $seoName => $seoValue) {
+        foreach ($state['seoFields'] as $key => $value) {
+            if (in_array($key, $locales, true) && is_array($value)) {
+                foreach ($value as $seoName => $seoValue) {
                     data_set($seoFieldState, "{$seoName}.{$key}", $seoValue);
                 }
+
+                continue;
             }
+
+            $seoFieldState[$key] = $value;
         }
 
         $this->record->saveSeoFieldState($seoFieldState);
@@ -52,10 +54,6 @@ trait SavesSeoFields
 
     protected function hasSeoFields(array $state): bool
     {
-        if (isset($state['seoFields'])) {
-            return true;
-        }
-
-        return LocaleCollection::some(fn (Locale $locale): bool => isset($state[$locale->locale()]['seoFields']));
+        return isset($state['seoFields']);
     }
 }
